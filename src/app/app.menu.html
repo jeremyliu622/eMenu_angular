@@ -1,0 +1,24 @@
+
+MENU
+<table>
+    <tr *ngFor="let food of _allFoodArray">
+        <td>
+            {{food.foodName}}
+        </td>
+        <td>
+            {{food.description}}
+        </td>
+        <td>
+            {{food.group}}
+        </td>
+        <td>
+            {{food.price | currency}}
+        </td>
+        <td>
+            <button (click)="deleteFood(food._id)" style="margin-left: 25px">Delete</button>
+        </td>
+        <td>
+            <button (click)="editFood(food._id)" style="margin-left: 25px">Edit</button>
+        </td>
+    </tr>
+</table>
