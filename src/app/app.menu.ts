@@ -11,7 +11,6 @@ export class MenuComponent {
     _http: HttpClient;
     _url = "http://localhost:1337/";
     _allFoodArray: Array<any>;
-    foodID: String;
 
 
     constructor(private http: HttpClient, private router: Router) {
@@ -20,20 +19,26 @@ export class MenuComponent {
     }
 
     getAllFood() {
-        let url = this._url + "menu"
+        let url = this._url + "menu";
         this._http.get<any>(url)
             .subscribe(result => {
                 this._allFoodArray = result.allFood
             })
     }
 
-    deleteFood(foodID) {
-        let url = this._url + "admin/deleteFood/" + foodID
-        this._http.delete<any>(url)
-            .subscribe(data => {
-                console.log("ok");
-                this.getAllFood();
-            })
+    deleteFood(foodID, foodName) {
+        let deleteConfirm = confirm('Are you sure to delete ' + foodName + "?");
+        
+        if(deleteConfirm){
+            let url = this._url + "admin/deleteFood/" + foodID;
+            
+            this._http.delete<any>(url)
+                .subscribe(data => {
+                    console.log("ok");
+                    this.getAllFood();
+                })
+        }
+
     }
 
     editFood(foodID) {

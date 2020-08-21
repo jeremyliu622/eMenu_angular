@@ -1,1 +1,13 @@
-123
+{{_errorMessage}}
+
+<div *ngIf="selectedFood">
+    <b>Name</b><br>
+    <input type="text" [(ngModel)]=selectedFood.foodName ><br><br>
+    <b>Description</b><br>
+    <input type="text" [(ngModel)]=selectedFood.description><br><br>
+    <b>Group</b><br>
+    <input type="text" [(ngModel)]=selectedFood.group><br><br>
+    <b>Price</b><br>
+    <input type="number" [(ngModel)]=selectedFood.price><br><br>
+    <input type="submit" value="Update Item" (click)="updateFood()" ><br><br>
+</div>

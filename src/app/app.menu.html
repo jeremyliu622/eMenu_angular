@@ -15,10 +15,12 @@ MENU
             {{food.price | currency}}
         </td>
         <td>
-            <button (click)="deleteFood(food._id)" style="margin-left: 25px">Delete</button>
+            <button (click)="deleteFood(food._id, food.foodName)" style="margin-left: 25px">Delete</button>
         </td>
         <td>
             <button (click)="editFood(food._id)" style="margin-left: 25px">Edit</button>
         </td>
     </tr>
 </table>
+
+<a routerLink="admin/addFood" routerLinkActive="active">Add Food</a>
