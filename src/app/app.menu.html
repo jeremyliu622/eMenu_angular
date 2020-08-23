@@ -11,9 +11,17 @@ MENU
         {{item.key}}
         <a name={{item.key}}></a>
     </div>
-    <li *ngFor="let food of item.value" (click)="onSelect(food)">
-        {{food.foodName}} 
+    <li *ngFor="let food of item.value">
+        <span (click)="onSelect(food)">{{food.foodName}}</span>
         <span style="margin-left: 30px">{{food.price | currency}}</span>
+        <button style="margin-left: 30px" (click)="foodIncrease(food)">+</button>
+        <span *ngIf="!orderedFood[food.foodName]">
+            0
+        </span>
+        <span *ngIf="orderedFood[food.foodName] != 0">
+            {{orderedFood[food.foodName]}}
+        </span>
+        <button (click)="foodDecrease(food)">-</button>
         <button (click)="deleteFood(food._id, food.foodName)" style="margin-left: 30px">Delete</button>
         <button (click)="editFood(food._id)" style="margin-left: 30px">Edit</button>
         <div *ngIf="selectedFood === food">
@@ -22,6 +30,9 @@ MENU
     </li>
 </div>
 
+<br>
+Total Price: {{totalPrice | currency}}
 
 
+<br>
 <a routerLink="admin/addFood" routerLinkActive="active">Add Food</a>

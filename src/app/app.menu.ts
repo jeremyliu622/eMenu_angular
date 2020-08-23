@@ -13,12 +13,14 @@ export class MenuComponent {
     _allFoodArray: Array<any>;
     _foodGroupDict;
     selectedFood;
+    orderedFood: Object = {};
+    totalPrice: number = 0;
+
 
 
     constructor(private http: HttpClient, private router: Router) {
         this._http = http;
         this.getAllFood();
-
 
     }
 
@@ -68,6 +70,29 @@ export class MenuComponent {
 
     onSelect(food) {
         this.selectedFood = food;
+    }
+
+    foodIncrease(food) {
+        if(this.orderedFood[food.foodName] >= 0) {
+            this.orderedFood[food.foodName] += 1;
+
+        }
+        else{
+            this.orderedFood[food.foodName] = 1;
+        }
+        this.totalPrice += food.price;
+    }
+
+    foodDecrease(food) {
+        if(this.orderedFood[food.foodName] > 0) {
+            this.orderedFood[food.foodName] -= 1;
+            this.totalPrice -= food.price;
+
+        }
+        else{
+            this.orderedFood[food.foodName] = 0;
+        }
+
     }
 
 
