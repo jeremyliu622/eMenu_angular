@@ -11,19 +11,40 @@ export class MenuComponent {
     _http: HttpClient;
     _url = "http://localhost:1337/";
     _allFoodArray: Array<any>;
+    _foodGroupDict;
+    selectedFood;
 
 
     constructor(private http: HttpClient, private router: Router) {
         this._http = http;
         this.getAllFood();
+
+
     }
+
+
 
     getAllFood() {
         let url = this._url + "menu";
         this._http.get<any>(url)
             .subscribe(result => {
-                this._allFoodArray = result.allFood
-            })
+                this._allFoodArray = result.allFood;
+                this.sortFoodIntoGroups()
+
+            });
+    }
+
+    sortFoodIntoGroups(){
+        this._foodGroupDict = {};
+        for(let i in this._allFoodArray) {
+            // console.log(this._allFoodArray[i].group)
+            if(!this._foodGroupDict[this._allFoodArray[i].group]) {
+                this._foodGroupDict[this._allFoodArray[i].group] = []
+            }
+            this._foodGroupDict[this._allFoodArray[i].group].push(this._allFoodArray[i])
+        };
+        // console.log(this._foodGroupDict);
+
     }
 
     deleteFood(foodID, foodName) {
@@ -38,7 +59,6 @@ export class MenuComponent {
                     this.getAllFood();
                 })
         }
-
     }
 
     editFood(foodID) {
@@ -46,7 +66,9 @@ export class MenuComponent {
     }
 
 
-
+    onSelect(food) {
+        this.selectedFood = food;
+    }
 
 
 }

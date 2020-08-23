@@ -1,26 +1,27 @@
-
 MENU
-<table>
-    <tr *ngFor="let food of _allFoodArray">
-        <td>
-            {{food.foodName}}
-        </td>
-        <td>
+
+<nav *ngFor="let item of _foodGroupDict | keyvalue">
+    <a href=#{{item.key}}>{{item.key}}</a>
+</nav>
+<br><br>
+
+
+<div *ngFor="let item of _foodGroupDict | keyvalue">
+    <div>
+        {{item.key}}
+        <a name={{item.key}}></a>
+    </div>
+    <li *ngFor="let food of item.value" (click)="onSelect(food)">
+        {{food.foodName}} 
+        <span style="margin-left: 30px">{{food.price | currency}}</span>
+        <button (click)="deleteFood(food._id, food.foodName)" style="margin-left: 30px">Delete</button>
+        <button (click)="editFood(food._id)" style="margin-left: 30px">Edit</button>
+        <div *ngIf="selectedFood === food">
             {{food.description}}
-        </td>
-        <td>
-            {{food.group}}
-        </td>
-        <td>
-            {{food.price | currency}}
-        </td>
-        <td>
-            <button (click)="deleteFood(food._id, food.foodName)" style="margin-left: 25px">Delete</button>
-        </td>
-        <td>
-            <button (click)="editFood(food._id)" style="margin-left: 25px">Edit</button>
-        </td>
-    </tr>
-</table>
+        </div>
+    </li>
+</div>
+
+
 
 <a routerLink="admin/addFood" routerLinkActive="active">Add Food</a>

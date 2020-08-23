@@ -11,11 +11,7 @@ export class EditFoodComponent {
     _http: HttpClient;
     _url = "http://localhost:1337/";
     foodID: String;
-    selectedFood: any;
-    foodName: String;
-    group: String;
-    description: String;
-    price: Number;
+    selectedFood;
     _errorMessage: String = "";
 
 
