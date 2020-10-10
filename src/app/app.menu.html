@@ -5,6 +5,8 @@ MENU
 </nav>
 <br><br>
 
+Table Number: <input type="text" [(ngModel)]="tableNum">
+
 
 <div *ngFor="let item of _foodGroupDict | keyvalue">
     <div>
@@ -33,6 +35,25 @@ MENU
 <br>
 Total Price: {{totalPrice | currency}}
 
+<br>
+
+<td><input type="button" (click)="submitOrder()" value="Submit Order"></td>
+<td><input type="button" (click)="clearOrder()" value="Clear Order"></td>
+
 
 <br>
 <a routerLink="admin/addFood" routerLinkActive="active">Add Food</a>
+
+<br>
+<td><input type="button" (click)="orderHistory()" value="Order History"></td>
+<br>
+{{_errorMessage}}
+
+
+
+<div *ngIf="showHistory">
+    <div *ngFor="let item of historyOrder | keyvalue">
+        {{item.key}} * {{item.value}}
+    </div>
+    Total Price: {{historyPrice |currency }}
+</div>
