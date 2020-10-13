@@ -25,6 +25,7 @@ export class AddFoodComponent {
 
     addFood() {
         let url = this._url + "admin/createFood";
+
         let newFood = {
             "foodName": this.foodName,
             "group": this.group,

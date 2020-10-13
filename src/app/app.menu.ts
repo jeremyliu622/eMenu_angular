@@ -15,7 +15,7 @@ export class MenuComponent {
     selectedFood;
     orderedFood: Object = {};
     unCompletedOrders;
-    historyOrder: Object = {};
+    historyOrder; 
     historyPrice: number = 0;
     showHistory: Boolean = false;
     totalPrice: number = 0;

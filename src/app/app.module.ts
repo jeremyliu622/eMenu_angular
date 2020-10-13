@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './app.menu';
 import { AddFoodComponent } from './app.addFood';
 import { EditFoodComponent } from './app.editFood';
+import { OrderComponent } from './app.orders';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     AddFoodComponent,
-    EditFoodComponent
+    EditFoodComponent,
+    OrderComponent
 
   ],
   imports: [

@@ -1,0 +1,47 @@
+
+<br>
+<b>Table Number</b><br>
+<input type="text" [(ngModel)]="tableNum"><br><br>
+<b>Date</b><br>
+<input type="date" [(ngModel)]="orderDate"><br><br>
+<b>Completed</b><br>
+<input type="checkbox" [(ngModel)]="isCompleted"><br><br>
+<input type="submit" value="Search" (click)="findOrders()">
+<input type="submit" value="Show Tables" (click)="showTables()"><br><br>
+
+
+
+<div *ngFor="let num of _unCompletedTables">
+    <input type="submit" value="table {{num}}" (click)="table(num)"><br><br>
+
+</div>
+
+<div *ngIf="_selectedOrders && !isConfirmed">
+    <div *ngFor="let order of _selectedOrders">
+        table: {{order.tableNum}}
+        {{order.orderTime | date:'medium' }}
+        <input type="submit" value="Edit" (click)="table(1)"><br><br>
+
+        <div *ngFor="let item of order.orderItems[0] | keyvalue">
+            {{item.key}} {{item.value}}
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isConfirmed">
+    <b>Table {{_selectedOrders[0].tableNum}}</b>
+    {{_selectedOrders[0].orderTime | date:'medium'}}<br>
+    Items:
+    <div *ngFor="let item of combinedOrder | keyvalue">
+        {{item.key}} * {{item.value}}
+    </div>
+    <br>Price: {{combinedPrice | currency}}<br>
+    Tax: {{combinedPrice * 0.05 | currency}}<br>
+    Total Price: {{combinedPrice * 1.05 | currency}}
+</div>
+
+<br>
+<input *ngIf="tableNum && !isConfirmed" type="submit" value="Confirm" (click)="confirm()">
+<input *ngIf="isConfirmed" type="submit" value="Checkout" (click)="checkout()">
+
+
